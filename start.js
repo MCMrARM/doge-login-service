@@ -5,6 +5,7 @@
 import app from './app';
 import Debug from "debug";
 import http from 'http';
+import {startGrpcServer} from "./grpc";
 
 const debug = Debug('judge-server:server');
 /**
@@ -87,3 +88,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+startGrpcServer();

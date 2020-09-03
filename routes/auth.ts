@@ -57,6 +57,7 @@ router.post('/login', async (req, res, next) => {
       let content = await result.json();
       let userInfo = await getUserInfo(content["access_token"]);
       let jwt = await createJwt(userInfo["id"]);
+      (req as any).currentUserAuth.discordUserId = userInfo["id"];
       (req as any).currentUserAuth.accessToken = content["access_token"];
       (req as any).currentUserAuth.refreshToken = content["refresh_token"];
       res.json({appJwt: jwt, user: userInfo});
