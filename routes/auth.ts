@@ -68,4 +68,54 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+router.post('/logout', async (req, res, next) => {
+  let accessToken = (req as any).currentUserAuth["accessToken"];
+  try {
+    let data = {
+      client_id: config.clientId,
+      client_secret: config.clientSecret,
+      token_type_hint: "access_token",
+      token: accessToken
+    };
+    let f = await fetch("https://discordapp.com/api/oauth2/token/revoke", {
+      method: "POST",
+      body: new URLSearchParams(data),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    });
+    if (f.status !== 200)
+      console.error("Access token revocation failed (" + f.status + ")", await f.text());
+    else
+      console.log("Access token revocation okay", await f.text());
+  } catch (e) {
+    console.error("Access token revocation failed", e);
+  }
+  try {
+    let data = {
+      client_id: config.clientId,
+      client_secret: config.clientSecret,
+      token_type_hint: "refresh_token",
+      token: accessToken
+    };
+    let f = await fetch("https://discordapp.com/api/oauth2/token/revoke", {
+      method: "POST",
+      body: new URLSearchParams(data),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }
+    });
+    if (f.status !== 200)
+      console.error("Refresh token revocation failed (" + f.status + ")", await f.text());
+    else
+      console.log("Refresh token revocation okay", await f.text());
+  } catch (e) {
+    console.error("Refresh token revocation failed", e);
+  }
+  delete (req as any).currentUserAuth["discordUserId"];
+  delete (req as any).currentUserAuth["accessToken"];
+  delete (req as any).currentUserAuth["refreshToken"];
+  res.status(200).json({});
+});
+
 export default router;
