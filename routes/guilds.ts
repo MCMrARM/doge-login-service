@@ -45,7 +45,7 @@ router.get('/', async (req, res, next) => {
             ret.push({
                 id: guild.id,
                 name: guild.name,
-                iconUrl: guild.icon ? "https://cdn.discordapp.com/icons/" + guild.icon + "/guild_icon.png?size=32" : null
+                icon: guild.icon
             })
         }
         res.json(ret);
