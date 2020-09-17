@@ -9,7 +9,7 @@ function createJwt(discordId: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     jwt.sign({did: discordId}, config.jwtPrivateKey, {
       algorithm: "RS256",
-      expiresIn: 10 * 60 * 60 * 1000
+      expiresIn: 10 * 60'' * 1000
     }, (err, str) => {
       if (err)
         reject(err);
