@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "start": "node start.js",
+    "start": "node build/start.js",
     "tsc": "tsc"
   },
   "dependencies": {

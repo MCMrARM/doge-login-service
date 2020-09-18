@@ -1,9 +1,7 @@
 .idea/
 node_modules/
+build/
 config.ts
-config.js
-app.js
-routes/*.js
 jwt-private.pem
 jwt-public.pem
 *.iml
