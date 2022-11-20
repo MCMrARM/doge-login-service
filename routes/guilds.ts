@@ -1,6 +1,6 @@
 import express from "express";
 import fetch from "node-fetch";
-import {NodeEntry, NodeRegistryService} from "../rpc/services/NodeRegistryService";
+import {NodeEntry, NodeRegistryService} from "../rpc/services/NodeRegistryService.js";
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
         });
         if (result.status !== 200)
             throw Error("status != 200");
-        let data = await result.json();
+        let data: any = await result.json();
 
         let nodes = new Map<NodeEntry, string[]>();
         for (let guild of data) {

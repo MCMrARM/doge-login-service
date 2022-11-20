@@ -1,6 +1,6 @@
-import {registerSimpleService} from "@mrarm/grpc-common";
-import grpc from "grpc";
-import {NodeInfoClient} from "../client/NodeInfoClient";
+import {registerSimpleService, ServerCall} from "@mrarm/grpc-common";
+import grpc from "@grpc/grpc-js";
+import {NodeInfoClient} from "../client/NodeInfoClient.js";
 
 type NodeRegisterArgs = {
     connectAddress: string,
@@ -53,7 +53,7 @@ export class NodeRegistryService {
         });
     }
 
-    async registerNode(arg: grpc.ServerUnaryCall<NodeRegisterArgs>) {
+    async registerNode(arg: ServerCall<NodeRegisterArgs>) {
         console.log(`Node requested registration: ${arg.request.connectAddress}`);
         if (arg.request.initial) {
             if (arg.request.connectAddress in this.addressToNode) {

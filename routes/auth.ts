@@ -1,7 +1,7 @@
 import express from "express";
 import fetch from "node-fetch";
 import {URLSearchParams} from 'url';
-import {config} from "../config";
+import {config} from "../config.js";
 import jwt from "jsonwebtoken";
 const router = express.Router();
 
@@ -14,12 +14,12 @@ function createJwt(discordId: string): Promise<string> {
       if (err)
         reject(err);
       else
-        resolve(str);
+        resolve(str!);
     });
   });
 }
 
-async function getUserInfo(accessToken: string) {
+async function getUserInfo(accessToken: string): Promise<any> {
   let result = await fetch("https://discordapp.com/api/v6/users/@me", {
     headers: {
       "Authorization": "Bearer " + accessToken
@@ -54,7 +54,7 @@ router.post('/login', async (req, res, next) => {
       console.log("Login failed", await result.text());
       res.status(500).send("");
     } else {
-      let content = await result.json();
+      let content: any = await result.json();
       let userInfo = await getUserInfo(content["access_token"]);
       let jwt = await createJwt(userInfo["id"]);
       (req as any).currentUserAuth.discordUserId = userInfo["id"];

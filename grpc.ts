@@ -1,5 +1,5 @@
-import grpc from "grpc";
-import {NodeRegistryService} from "./rpc/services/NodeRegistryService";
+import grpc from "@grpc/grpc-js";
+import {NodeRegistryService} from "./rpc/services/NodeRegistryService.js";
 
 export function startGrpcServer() {
     let server = new grpc.Server();

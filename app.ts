@@ -2,9 +2,9 @@ import express from "express";
 import logger from "morgan";
 import sessions from "client-sessions";
 
-import authRouter from './routes/auth';
-import guildsRouter from './routes/guilds';
-import {config} from "./config";
+import authRouter from './routes/auth.js';
+import guildsRouter from './routes/guilds.js';
+import {config} from "./config.js";
 
 let app = express();
 

@@ -2,10 +2,10 @@
  * Module dependencies.
  */
 
-import app from './app';
+import app from './app.js';
 import Debug from "debug";
 import http from 'http';
-import {startGrpcServer} from "./grpc";
+import {startGrpcServer} from "./grpc.js";
 
 const debug = Debug('judge-server:server');
 /**
