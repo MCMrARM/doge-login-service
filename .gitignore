@@ -1,7 +1,6 @@
 .idea/
 node_modules/
 build/
-config.ts
 jwt-private.pem
 jwt-public.pem
 *.iml
