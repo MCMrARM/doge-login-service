@@ -45,7 +45,7 @@ jobs:
         with:
           context: ./src/samples/simple
           tags: |
-            ghcr.io/MCMrARM/doge-login-service/simple:latest
+            ghcr.io/mcmrarm/doge-login-service/simple:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Image digest
