@@ -4,6 +4,7 @@ import sessions from "client-sessions";
 
 import authRouter from './routes/auth.js';
 import guildsRouter from './routes/guilds.js';
+import internalRouter from './routes/internal.js';
 import {config} from "./config.js";
 
 let app = express();
@@ -29,5 +30,6 @@ app.use(function(req, res, next) {
 });
 app.use('/api/v1/auth/guilds', guildsRouter);
 app.use('/api/v1/auth', authRouter);
+app.use('/internal', internalRouter);
 
 export default app;

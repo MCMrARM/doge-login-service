@@ -5,6 +5,7 @@ import {config} from "../../config.js";
 
 type NodeRegisterArgs = {
     connectAddress: string,
+    webPort: number,
     guildIds: string[],
     initial: boolean
 }
@@ -12,12 +13,14 @@ type NodeRegisterArgs = {
 export class NodeEntry {
 
     address: string;
+    webPort: number;
     client: NodeInfoClient;
     guilds: string[];
     private wasClosed: boolean = false;
 
-    constructor(address: string, client: NodeInfoClient, guilds: string[]) {
+    constructor(address: string, client: NodeInfoClient, guilds: string[], webPort: number) {
         this.address = address;
+        this.webPort = webPort;
         this.client = client;
         this.guilds = guilds;
     }
@@ -64,7 +67,7 @@ export class NodeRegistryService {
         }
         if (!(arg.request.connectAddress in this.addressToNode)) {
             let client = new NodeInfoClient(arg.request.connectAddress, grpc.credentials.createInsecure());
-            let node = new NodeEntry(arg.request.connectAddress, client, arg.request.guildIds);
+            let node = new NodeEntry(arg.request.connectAddress, client, arg.request.guildIds, arg.request.webPort);
             node.startKeepAliveTask(this.onNodeDropped.bind(this));
             this.addressToNode[arg.request.connectAddress] = node;
             for (let guildId of arg.request.guildIds)
