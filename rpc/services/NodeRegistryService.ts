@@ -85,7 +85,7 @@ export class NodeRegistryService {
         }
         return {
             'jwtPublicKey': config.jwtPublicKey,
-            'nginxHost': config.nginxHost
+            'publicUri': config.publicUri
         };
     }
 
