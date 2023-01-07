@@ -1,6 +1,7 @@
 import {registerSimpleService, ServerCall} from "@mrarm/grpc-common";
 import grpc from "@grpc/grpc-js";
 import {NodeInfoClient} from "../client/NodeInfoClient.js";
+import {config} from "../../config.js";
 
 type NodeRegisterArgs = {
     connectAddress: string,
@@ -79,7 +80,9 @@ export class NodeRegistryService {
                 this.guildIdToNode[guildId] = node;
             node.guilds = arg.request.guildIds;
         }
-        return {};
+        return {
+            'jwtPublicKey': config.jwtPublicKey
+        };
     }
 
     onNodeDropped(node: NodeEntry) {
