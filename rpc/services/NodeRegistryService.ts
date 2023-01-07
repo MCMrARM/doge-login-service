@@ -84,7 +84,8 @@ export class NodeRegistryService {
             node.guilds = arg.request.guildIds;
         }
         return {
-            'jwtPublicKey': config.jwtPublicKey
+            'jwtPublicKey': config.jwtPublicKey,
+            'nginxHost': config.nginxHost
         };
     }
 
