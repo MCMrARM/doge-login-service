@@ -19,7 +19,7 @@ router.get('/get-web-addr', async (req, res, next) => {
     }
 
     originalUri = originalUri.substring('/api/v1/servers/'.length);
-    let discordId = parseInt(originalUri.substring(0, originalUri.indexOf('/')));
+    let discordId = originalUri.substring(0, originalUri.indexOf('/'));
     if (!discordId) {
         res.status(403).send("");
         return;
