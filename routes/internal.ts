@@ -13,12 +13,12 @@ router.get('/get-web-addr', async (req, res, next) => {
         originalUri = '';
     }
 
-    if (!originalUri.startsWith('/api/v1/')) {
+    if (!originalUri.startsWith('/api/v1/servers/')) {
         res.status(403).send("");
         return;
     }
 
-    originalUri = originalUri.substring('/api/v1/'.length);
+    originalUri = originalUri.substring('/api/v1/servers/'.length);
     let discordId = parseInt(originalUri.substring(0, originalUri.indexOf('/')));
     if (!discordId) {
         res.status(403).send("");
